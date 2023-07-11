@@ -1,83 +1,73 @@
-# app/controllers/services_controller.rb
 class ServicesController < ApplicationController
-   before_action :check_admin, only:[:create, :update,:show, :services_with_names]
-    def create
-      service = @current_user.services.new(service_params)
-      if service.save
-        render json:  service, status: :created
-      else
-        render json: {error: @service.errors.full_messages}, status: :unprocessable_entity
-      end
-    end
-    def update
-      byebug
-      service = @current_user.services.find_by_id(params[:id])
-      
-      if service.update(service_params)
-        render json: service, status: :ok
-      else
-        render json: { error: service.errors.full_messages }, status: :unprocessable_entity
-      end
-    end
-    def show
-     if  service = Service.find(params[:id])
-        render json: service, status: :ok
-      else
-        render json: { error: "Unauthorized" }, status: :unauthorized
-      end
-    end
-
-    def services_with_names
-      # if services = Service.pluck(:id, :name)
-      # byebug
-      if services = Service.find_by_name(params[:name])
-
-
-        render json: services, status: :ok
-      else
-        render json: { error: "Unauthorized" }, status: :unauthorized
-      end
-    end
-
-    def index
-      services = Service.all 
-      render json: services, status: :ok
-    end
-
-    
-    
-    private
-    def service_params
-      params.permit(:name, :status, :address)
+  before_action :check_admin, only:[:create,:show_all_customer,:destroy, :update,:show, :services_with_names]
+  
+  def create
+    service = @current_user.services.new(service_params)
+    if service.save
+      render json:  service, status: :created
+    else
+      render json: {error: @service.errors.full_messages}, status: :unprocessable_entity
     end
   end
-  
 
+  def update
+    
+    service = @current_user.services.find_by_id(params[:id])
+    byebug
+    if service.update(service_params)
+      render json: service, status: :ok
+    else
+      render json: { error: service.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
 
+  def destroy
+    service = @current_user.services.find_by_id(params[:id])
+    if service == nil
+      render json: { error: "Service not exist " }
+    elsif service.delete
+      render json: { error: "Service Deleted " }
+    else
+      render json: { error: service.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
 
-    # def index
-    #   if params[:city].present?
-    #     @services = Service.where(city: params[:city])
-    #   elsif params[:latitude].present? && params[:longitude].present?
-    #     @services = Service.near([params[:latitude], params[:longitude]], 5) # Adjust the distance as per your requirement
-    #   else
-    #     @services = Service.all
-    #   end
-  
-    #   render json: @services
-    # end
-  
-    # def sort_by_rating
-    #   @services = Service.order(rating: :desc)
-    #   render json: @services
-    # end
-  
-    # def filter_by_rating
-    #   if params[:min_rating].present? && params[:max_rating].present?
-    #     @services = Service.where(rating: params[:min_rating]..params[:max_rating])
-    #   else
-    #     @services = Service.all
-    #   end
-  
-    #   render json: @services
-    # end
+  def show
+    if Service.exists?(params[:id])
+      @service = Service.find(params[:id])
+      render json: @service, status: :ok
+    else
+      render json: { error: "Can't Find Service With This Given Id" }
+    end
+  end
+
+  def services_with_names
+    if services = Service.find_by(service_name: params[:service_name])
+      render json: services, status: :ok
+    else
+      render json: { error: "Can't Find Service" }
+    end
+  end
+
+  def index
+    services = Service.all 
+    render json: services, status: :ok
+  end
+
+  def show_all_customer
+    customer = Customer.all
+    customer =  customer.select(:id, :name,:email,:city,:address)
+    render json: customer, status: :ok
+  end
+
+  private
+  def service_params
+    params.permit(:service_name, :status, :address, :city)
+  end
+
+  def check_admin
+    if @current_user.type != "Admin"
+      render json: {error: "Not Allowed"}
+    end
+  end
+end

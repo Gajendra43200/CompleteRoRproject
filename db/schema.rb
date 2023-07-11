@@ -10,34 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_07_125959) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_11_102413) do
   create_table "reviews", force: :cascade do |t|
     t.integer "rating"
     t.text "content"
-    t.integer "user_id", null: false
     t.integer "service_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "customer_id"
     t.index ["service_id"], name: "index_reviews_on_service_id"
-    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "services", force: :cascade do |t|
-    t.string "name"
+    t.string "service_name"
     t.string "address"
     t.string "status"
-    t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "admin_id"
+    t.string "city"
     t.index ["admin_id"], name: "index_services_on_admin_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "address_line1"
-    t.string "address_line2"
-    t.string "locality"
+    t.string "address"
+    t.string "location"
     t.string "city"
     t.string "state"
     t.string "type"
@@ -47,6 +45,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_07_125959) do
     t.string "email"
   end
 
-  add_foreign_key "reviews", "services"
-  add_foreign_key "reviews", "users"
 end

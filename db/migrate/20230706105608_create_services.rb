@@ -4,7 +4,7 @@ class CreateServices < ActiveRecord::Migration[7.0]
       t.string :name
       t.string :address
       t.string :status
-      t.integer :rating
+      
 
       t.timestamps
     end

@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.2"
 
+gem 'active_model_serializers'
+
 gem "jwt"
 
 gem "byebug"
