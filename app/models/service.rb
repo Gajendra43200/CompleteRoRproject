@@ -7,4 +7,5 @@ class Service < ApplicationRecord
     belongs_to :admin, class_name: 'Admin', foreign_key: 'admin_id', optional: true
     has_many :reviews
     enum :status, [:open,  :closed]
+    has_one_attached :service_profile
 end

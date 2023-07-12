@@ -8,4 +8,8 @@ class Customer < User
     validates :type, presence: true
     validates :password_digest, presence: true
     validates :email, presence: true, uniqueness: true
+    has_one_attached :customer_profile
+
+
+
 end

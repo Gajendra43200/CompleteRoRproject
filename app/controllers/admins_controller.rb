@@ -8,8 +8,13 @@ class AdminsController < ApplicationController
       render json: @admin.errors, status: :unprocessable_entity
     end
   end
+  def index
+    addmin = Admin.all
+    render json: addmin, status: :ok
+  end
+
   private
   def admin_params
-    params.permit(:name, :email, :password_digest, :address, :location, :city, :state)
+    params.permit(:name, :email, :password_digest, :address, :location, :city, :state, :admin_profile)
   end
 end

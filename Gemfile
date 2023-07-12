@@ -7,6 +7,8 @@ gem 'active_model_serializers'
 
 gem "jwt"
 
+gem 'rubocop-rails', require: false
+
 gem "byebug"
 
 gem "bcrypt", "~> 3.1.7"

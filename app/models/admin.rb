@@ -7,4 +7,5 @@ class Admin < User
      validates :state, presence: true
      validates :password_digest, presence: true
      validates :email, presence: true, uniqueness: true
+     has_one_attached :admin_profile
 end
