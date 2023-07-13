@@ -3,9 +3,7 @@ Rails.application.routes.draw do
 
   post 'admins', to: 'admins#create'
 
-  get 'index', to: 'admins#index'
-
-  post 'customers', to: "customers#create"
+  get 'index', to: 'services#index'
 
   get  'allcustomer', to: 'services#show_all_customer'
 
@@ -15,19 +13,19 @@ Rails.application.routes.draw do
 
   post'reviewcreate',to: 'reviews#create'
 
-  get 'singleservice', to: 'customers#search_service'
+  get 'allservice', to: 'services#all_services'
 
   get 'city', to: 'customers#city'
-
-  # get 'sortbyratings', to: 'customers#sort_by_ratings'
-
-  get 'sortbyratings', to: 'customers#sort_filter_by_rating'
-
-
-  get 'filterbyratings', to: 'customers#filter_by_ratings'
-
-  get 'filterbystatus', to: 'customers#filter_by_status'
-
+  
+  get 'singleservice', to: 'customers#search_service'
+  
+  get 'allservices', to: 'customers#all_services'
+  
+  post 'customers', to: "customers#create"
+  
   get 'serviceslocationwise', to: 'customers#search_by_location_services'
+  
+  get 'servicefiltersortstatus', to: 'customers#sort_filter_by_rating'
+  
 
 end

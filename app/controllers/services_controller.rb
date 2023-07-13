@@ -1,15 +1,14 @@
 class ServicesController < ApplicationController
-  #only:[:create,:show_all_customer,:destroy, :update,:show, :services_with_names]
   before_action :check_admin
   def create
     service = @current_user.services.new(service_params)
-      check_render1(service,"Enter Valid Detail")if service.save
+    check_render1(service, 'Enter Valid Detail') if service.save
   end
 
   def update
     service = @current_user.services.find_by_id(params[:id])
-    if service.blank?
-      render json: { error:"Service Not Exits For Current Admin" }, status: :unprocessable_entity
+    if service.nil?
+      render json: { error: 'Service Not Exits For Current Admin' }
     else
       service.update(service_params)
       render json: service, status: :ok
@@ -18,37 +17,32 @@ class ServicesController < ApplicationController
 
   def destroy
     service = @current_user.services.find_by_id(params[:id])
-    if service.blank?
-      render json: { error: "Service not exist " }
-    elsif service.delete
-      render json: { error: "Service Deleted " }
+    if service.nil?
+      render json: { error: 'Service not exist For This Current User' }
     else
-      render json: { error: service.errors.full_messages }, status: :unprocessable_entity
+      service.delete
+      render json: { error: 'Service Deleted' }
     end
-  end
-
-  def show
-      service = Service.find(params[:id])if Service.exists?(params[:id])
-      check_render1(service,"Can't Find Service With This Given Id")
   end
 
   def services_with_names
-    if services = Service.find_by(service_name: params[:service_name])
-      render json: services, status: :ok
-    else
-      render json: { error: "Can't Find Service" }
-    end
+    services = Service.find_by(service_name: params[:service_name])
+    check_render1(services, 'Can not Find Service')
   end
 
   def index
-    services = Service.all 
-    render json: services, status: :ok
+    if params[:id].nil?
+    services = Service.all
+    check_render1(services, 'Not Find Services')
+    else
+      service = Service.find_by_id(params[:id])
+      check_render1(service, "Can't Find Service With This Given Id")
+    end
   end
 
   def show_all_customer
     customer = Customer.all
-    # customer =  customer.select(:id, :name,:email,:city,:address,:location, :state, :location, :password_digest )
-    render json: customer, status: :ok
+    check_render1(customer, 'Not Find Services')
   end
 
   private
@@ -58,15 +52,14 @@ class ServicesController < ApplicationController
   end
 
   def check_admin
-    if @current_user.type != "Admin"
-      render json: {error: "Not Allowed"}
-    end
+    render json: { error: 'Not Allowed' } unless @current_user.type == 'Admin'
   end
-  def check_render1(service,message)
+
+  def check_render1(service, message)
     if service.present?
-      render json: service , status: :ok
+      render json: service, status: :ok
     else
-      render json: {message: "Please #{message}"}
+      render json: { message: "Please #{message}" }
     end
   end
 end

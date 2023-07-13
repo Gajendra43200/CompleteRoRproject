@@ -3,5 +3,4 @@ class CustomerSerializer < ActiveModel::Serializer
   def customer_profile
     Rails.application.routes.url_helpers.rails_blob_path(object.customer_profile, only_path: true)if object.customer_profile.attached?
   end
-
 end
