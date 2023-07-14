@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 class ServicesController < ApplicationController
+  # Service to download ftp from the
   before_action :check_admin
   def create
     service = @current_user.services.new(service_params)
@@ -32,8 +35,8 @@ class ServicesController < ApplicationController
 
   def index
     if params[:id].nil?
-    services = Service.all
-    check_render1(services, 'Not Find Services')
+      services = Service.all
+      check_render1(services, 'Not Find Services')
     else
       service = Service.find_by_id(params[:id])
       check_render1(service, "Can't Find Service With This Given Id")
@@ -46,7 +49,7 @@ class ServicesController < ApplicationController
   end
 
   private
-  
+
   def service_params
     params.permit(:service_name, :status, :address, :city, :service_profile)
   end

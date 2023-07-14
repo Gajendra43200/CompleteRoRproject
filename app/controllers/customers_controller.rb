@@ -1,38 +1,31 @@
+# frozen_string_literal: true
+
 class CustomersController < ApplicationController
+  # Service to download ftp from the
   skip_before_action :authenticate_request, only: [:create]
   before_action :check_customer, except: [:create]
 
-  # def create
-  #   @customer = Customer.new(customer_params)
-  #   if @customer.save
-  #     render json: @customer, status: :created
-  #   else
-  #     render json: @customer.errors.full_messages, status: :unprocessable_entity
-  #   end
-  # end
-
   def create
-    render json: (customer = Customer.new(customer_params)).save ? customer : customer.errors.full_messages, status: (customer.errors.empty? ? :created : :unprocessable_entity)
-  end
-  
-  # def city
-  #   if params[:city].present?
-  #     services = Service.where(city: params[:city])
-  #     check_render(services, "Enter Valid: city")
-  #   else
-  #     services = Service.all
-  #     check_render(services, "Service Not Exists")
-  #   end
-  # end
-
-  def all_services
-    render json: (service = Service.all).present? ? service : 'Services Not Exists'
-    # services = Service.all
-    # render json: services
+    @customer = Customer.new(customer_params)
+    if @customer.save
+      render json: @customer, status: :created
+    else
+      render json: @customer.errors.full_messages, status: :unprocessable_entity
+    end
   end
 
   def city
-    render json: (services = Service.where(city: params[:city])).present? ? services : 'Service Not Exists On This Location'
+    if params[:city].present?
+      services = Service.where(city: params[:city])
+      check_render(services, 'Enter Valid: city')
+    else
+      services = Service.all
+      check_render(services, 'Service Not Exists')
+    end
+  end
+
+  def all_services
+    render json: (service = Service.all).present? ? service : 'Services Not Exists'
   end
 
   def search_by_location_services
@@ -71,7 +64,7 @@ class CustomersController < ApplicationController
   def check_customer
     render json: { error: 'Not Allowed' } unless @current_user.type == 'Customer'
   end
-  
+
   def customer_params
     params.permit(:name, :email, :password_digest, :address, :location, :city, :state, :customer_profile)
   end
