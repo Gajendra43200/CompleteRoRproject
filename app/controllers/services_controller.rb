@@ -35,7 +35,7 @@ class ServicesController < ApplicationController
 
   def index
     if params[:id].nil?
-      services = Service.all
+      services = Service.all  
       check_render1(services, 'Not Find Services')
     else
       service = Service.find_by_id(params[:id])
