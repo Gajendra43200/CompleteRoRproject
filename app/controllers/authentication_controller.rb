@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
-class AuthenticationController < ApplicationController
+class AuthenticationController < ApiController
   # Service to download ftp from the
-  require 'jwt'
-  skip_before_action :authenticate_request
+  # require 'jwt'
+  skip_before_action :authenticate_request, :check_customer
+  # skip_before_action :check_admin
   def login
     @user = User.find_by_email(params[:email])
     if @user.nil?
@@ -14,12 +15,5 @@ class AuthenticationController < ApplicationController
     else
       render json: { error: 'unauthorized' }, status: :unauthorized
     end
-  end
-
-   private
-
-  def jwt_encode(payload)
-    secret_key = Rails.application.secrets.secret_key_base
-    JWT.encode(payload, secret_key, 'HS256')
   end
 end

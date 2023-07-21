@@ -10,4 +10,11 @@ class Service < ApplicationRecord
   has_many :reviews
   enum status: { open: 'open', close: 'close' }
   has_one_attached :service_profile
+  def self.ransackable_attributes(auth_object = nil)
+    ["address", "admin_id", "city", "created_at", "id", "service_name", "status", "updated_at"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["admin", "reviews", "service_profile_attachment", "service_profile_blob"]
+  end
 end
