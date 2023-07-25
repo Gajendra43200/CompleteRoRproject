@@ -55,6 +55,7 @@ class ReviewsController < ApiController
       check_render(services, 'Enter Valid: city/ On This City Service Not Exists')
     else
       service = Service.where(location: @current_user.location)
+      byebug
       if service.present?
         check_render(service, 'Service not exit on this location')
       else

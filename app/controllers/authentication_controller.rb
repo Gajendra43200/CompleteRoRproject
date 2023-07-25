@@ -15,4 +15,3 @@ class AuthenticationController < ApiController
     end
   end
 end
-

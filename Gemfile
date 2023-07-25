@@ -9,6 +9,8 @@ gem 'devise'
 
 gem 'jwt'
 
+gem 'rubocop'
+
 gem 'byebug'
 
 gem 'active_model_serializers'

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Service < ApplicationRecord
   # Service to download ftp from the
   belongs_to :user
