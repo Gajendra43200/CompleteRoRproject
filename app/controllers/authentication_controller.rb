@@ -1,7 +1,7 @@
 # frozen_string_literal: true
+
 class AuthenticationController < ApiController
   # frozen_string_literal: true
-
   skip_before_action :authenticate_request, :check_customer
   def login
     @user = User.find_by_email(params[:email])

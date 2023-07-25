@@ -1,6 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+<<<<<<< HEAD
   service_name: MyString
   location: MyString
   status: MyString
@@ -13,3 +14,15 @@ two:
   status: MyString
   city: MyString
   user: two
+=======
+  name: MyString
+  address: MyString
+  status: MyString
+  rating: 1
+
+two:
+  name: MyString
+  address: MyString
+  status: MyString
+  rating: 1
+>>>>>>> 51613cd590b6f5db442ed25aca69894ae347fd76

@@ -10,6 +10,7 @@ class Service < ApplicationRecord
   def self.ransackable_attributes(auth_object = nil)
     ["city", "created_at", "id", "location", "service_name", "status", "updated_at", "user_id"]
   end
+
   def self.ransackable_associations(auth_object = nil)
     ["reviews", "user"]
   end

@@ -1,4 +1,4 @@
-# Service to download ftp from the
+# frozen_string_literal: true
 
 class ServiceSerializer < ActiveModel::Serializer
   # Service to download ftp from the

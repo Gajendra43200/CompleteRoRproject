@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[7.0].define(version: 2023_07_24_123353) do
+=======
+ActiveRecord::Schema[7.0].define(version: 2023_07_21_062621) do
+>>>>>>> 51613cd590b6f5db442ed25aca69894ae347fd76
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -69,15 +73,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_24_123353) do
     t.integer "rating"
     t.text "content"
     t.integer "service_id", null: false
+<<<<<<< HEAD
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["service_id"], name: "index_reviews_on_service_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
+=======
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "customer_id"
+    t.index ["service_id"], name: "index_reviews_on_service_id"
+>>>>>>> 51613cd590b6f5db442ed25aca69894ae347fd76
   end
 
   create_table "services", force: :cascade do |t|
     t.string "service_name"
+<<<<<<< HEAD
     t.string "location"
     t.string "status"
     t.string "city"
@@ -85,11 +97,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_24_123353) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "avg_rating"
+=======
+    t.string "address"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "city"
+    t.integer "user_id"
+>>>>>>> 51613cd590b6f5db442ed25aca69894ae347fd76
     t.index ["user_id"], name: "index_services_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
+<<<<<<< HEAD
     t.string "password_digest"
     t.string "user_type"
     t.string "city"
@@ -99,11 +120,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_24_123353) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+=======
+    t.string "address"
+    t.string "location"
+    t.string "city"
+    t.string "state"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "password_digest"
+    t.string "email"
+>>>>>>> 51613cd590b6f5db442ed25aca69894ae347fd76
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+<<<<<<< HEAD
   add_foreign_key "reviews", "services"
   add_foreign_key "reviews", "users"
   add_foreign_key "services", "users"
+=======
+>>>>>>> 51613cd590b6f5db442ed25aca69894ae347fd76
 end

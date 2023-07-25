@@ -1,4 +1,4 @@
-  # Service to download ftp from the
+# Service to download ftp from the
 
 class User < ApplicationRecord
   # Service to download ftp from the

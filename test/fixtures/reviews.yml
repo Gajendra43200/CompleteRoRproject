@@ -3,11 +3,21 @@
 one:
   rating: 1
   content: MyText
+<<<<<<< HEAD
   service: one
   user: one
+=======
+  user: one
+  service: one
+>>>>>>> 51613cd590b6f5db442ed25aca69894ae347fd76
 
 two:
   rating: 1
   content: MyText
+<<<<<<< HEAD
   service: two
   user: two
+=======
+  user: two
+  service: two
+>>>>>>> 51613cd590b6f5db442ed25aca69894ae347fd76

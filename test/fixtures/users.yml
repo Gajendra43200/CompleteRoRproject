@@ -2,6 +2,7 @@
 
 one:
   name: MyString
+<<<<<<< HEAD
   password_digest: MyString
   type: 
   city: MyString
@@ -19,3 +20,20 @@ two:
   state: MyString
   address: MyString
   email: MyString
+=======
+  address_line1: MyString
+  address_line2: MyString
+  locality: MyString
+  city: MyString
+  state: MyString
+  type: 
+
+two:
+  name: MyString
+  address_line1: MyString
+  address_line2: MyString
+  locality: MyString
+  city: MyString
+  state: MyString
+  type: 
+>>>>>>> 51613cd590b6f5db442ed25aca69894ae347fd76

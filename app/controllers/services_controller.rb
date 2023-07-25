@@ -2,8 +2,6 @@
 
 class ServicesController < ApiController
   # Service to download ftp from the
-  # before_action :check_admin, only:[:create, :update, :destroy]
-  # skip_before_action :check_customer, only:[:create, :update, :destroy]
   before_action :check_admin, except: [:index]
   before_action :check_customer, only:[:index]
   def index

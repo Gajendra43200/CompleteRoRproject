@@ -12,6 +12,7 @@ class UsersController < ApiController
       render json: {user: user, token: token}
       # render json: { name: user.name,profile: user.user_profile.filename , email: user.email, token: token }, status: :created
       # render json: user, status: :created
+      
     else
       render json: user.errors, status: :unprocessable_entity
     end
